@@ -14,7 +14,7 @@ const NoteState=(props)=>{
       const title=newnote.title;
       const description=newnote.description;
       const images1=newnote.images;
-      const response=await fetch(`http://localhost:5000/auth/addnotes`,
+      const response=await fetch(`https://notebook-backend-2.onrender.com/auth/addnotes`,
       {method:'POST',
        headers:{
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const NoteState=(props)=>{
 
     
   const fetchallnotes=async ()=>{
-  const response=await fetch(`http://localhost:5000/auth/getnotes`,
+  const response=await fetch(`https://notebook-backend-2.onrender.com/auth/getnotes`,
   {method:'GET',
    headers:{
     "Content-Type": "application/json",
@@ -45,7 +45,7 @@ setnotes(json1);
   {console.log('backnotes',notes)}
   const DeleteNote=async(id)=>
   {
-    const response=await fetch(`http://localhost:5000/auth/deletenotes/${id}`,
+    const response=await fetch(`https://notebook-backend-2.onrender.com/auth/deletenotes/${id}`,
     {method:'DELETE',
      headers:{
       "Content-Type": "application/json",
@@ -61,7 +61,7 @@ setnotes(json1);
     
   
   const UpdateNote=async (id,title,description,image)=>{
-    const response=await fetch(`http://localhost:5000/auth/updatenotes/${id}`,
+    const response=await fetch(`https://notebook-backend-2.onrender.com/auth/updatenotes/${id}`,
     {method:'PUT',
      headers:{
       "Content-Type": "application/json",
@@ -93,7 +93,7 @@ setnotes(json1);
     
   {console.log(notes)}
   const updatenotes=async({name,password})=>{
-    const response=await fetch('https://localhost:5000/update',{
+    const response=await fetch('https://notebook-backend-2.onrender.com/update',{
       method:'PUT',
       headers:{
         'Content-Type':"application/json",
