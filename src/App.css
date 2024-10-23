@@ -285,6 +285,15 @@ width: 250px;
 border: transparent;
 border-bottom:2px solid white;
 }
+
+#password{
+  background: transparent;
+  border-bottom: black;
+  color: white;
+  width: 250px;
+  border: transparent;
+  border-bottom:2px solid white;
+  }
 #email1{
   background: transparent;
   border-bottom: black;
