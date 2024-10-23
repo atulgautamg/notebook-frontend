@@ -14,6 +14,7 @@ import {
   Route,
 
 } from "react-router-dom";
+import Practice1 from './context/Practice1';
 
 function App() {
   const [alert,setalert]=useState(null);
@@ -36,13 +37,14 @@ function App() {
         
         <Navbar/>
         <Alert alert={alert}></Alert>
-        <h1> Notebook App</h1>
         <Routes>
           <Route path="/"  key={'/'} element={<Home showalert={showalert} ></Home> }></Route>
           <Route path="/home" key={"/home"} element={<Home ></Home> }></Route>
           <Route path="/about" key={"about"} element={<About ></About> }></Route>          
           <Route path="/login"  key={"/login"}  element={<Login showalert={showalert} ></Login> }></Route>          
-          <Route path="/signup"  key={"/signup"} element={<Signup showalert={showalert}></Signup> }></Route>          
+          <Route path="/signup"  key={"/signup"} element={<Signup showalert={showalert}></Signup> }></Route>  
+          <Route path='/prac' element={<Practice1/>}></Route>      
+          <Route path='/note2' element={<Notestate/>}></Route>      
           
           </Routes>     
      </Router>

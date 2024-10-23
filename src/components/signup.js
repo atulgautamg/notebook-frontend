@@ -9,7 +9,7 @@ const Signup = (props) => {
     const handleclick=async (e)=>{
 e.preventDefault();
 const {name,email,password,date}=cred;
-const response=await fetch(`https://notebook-backend-67m9.onrender.com/auth/createuser`,
+const response=await fetch(`http://localhost:5000/auth/createuser`,
   {method:'POST',
    headers:{
     "Content-Type": "application/json",
@@ -38,8 +38,9 @@ const onChange=(e)=>{
     setcred({...cred,[e.target.name]:e.target.value});
    }
   return (
-    <div className="container" >
-    <form onSubmit={handleclick}>
+    <div className='backimage'>
+    <div className="container signup" >
+    <form className='signform' onSubmit={handleclick}>
   <div className="mb-3">
     <label htmlFor="name" className="form-label">Name</label>
     <input type="name" className="form-control" minLength={5} onChange={onChange} name="name" id="name" aria-describedby="name"/>
@@ -58,8 +59,9 @@ const onChange=(e)=>{
     <input type="password" className="form-control" minLength={5} name="cpassword" onChange={onChange} id="cpassword"/>
   </div>
   
-  <button type="submit"  className="btn btn-primary">Submit</button>
+  <button type="submit"  className="btn btn-primary submit1">Submit</button>
 </form>
+    </div>
     </div>
   )
 }

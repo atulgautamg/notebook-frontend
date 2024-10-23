@@ -1,4 +1,5 @@
-        
+
+
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react';
@@ -8,7 +9,7 @@ const Login = (props) => {
      let navigate=useNavigate();
     const handleclick=async (e)=>{
 e.preventDefault();
-const response=await fetch(`https://notebook-backend-67m9.onrender.com/auth/login`,
+const response=await fetch(`http://localhost:5000/auth/login`,
   {method:'POST',
    headers:{
     "Content-Type": "application/json",
@@ -23,6 +24,8 @@ const response=await fetch(`https://notebook-backend-67m9.onrender.com/auth/logi
    if(json.success)
    { 
     localStorage.setItem('token',json.token);
+    localStorage.setItem('user',json.user._id);
+    localStorage.setItem('name',json.user.name);
     props.showalert("login successfully","success");
     
     navigate("/");
@@ -37,18 +40,20 @@ const onChange=(e)=>{
     setcred({...cred,[e.target.name]:e.target.value});
    }    
   return (
-    <div className='container'>
-        <form onSubmit={handleclick}>
-  <div className="mb-3">
+    <div className='loginform' >
+    <div className='container login1'>
+        <form className='loginform2' onSubmit={handleclick}>
+  <div className="mb-3 email1">
     <label htmlFor="email" className="form-label">Email address</label>
-    <input type="email"  name="email"  value={cred.email} className="form-control" id="email" onChange={onChange} aria-describedby="email"/>
+    <input type="email"  name="email"  value={cred.email} className="form-control" id="email1" onChange={onChange} aria-describedby="email"/>
   </div>
-  <div className="mb-3">
+  <div className="mb-3 password1">
     <label htmlFor="password" className="form-label">Password</label>
-    <input type="password"  name="password" value={cred.password} className="form-control" id="password" onChange={onChange}/>
+    <input type="password"  name="password" value={cred.password} className="form-control" id="password1" onChange={onChange}/>
   </div>
-  <button type="submit"  className="btn btn-primary">Submit</button>
+  <button type="submit"  className="btn btn-primary submit1">Submit</button>
 </form>
+    </div>
     </div>
   )
 }

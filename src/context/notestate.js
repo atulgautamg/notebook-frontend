@@ -10,15 +10,18 @@ const NoteState=(props)=>{
       ]
       const a={name:"hello",title:"world"};
     const [notes,setnotes]=useState(notes1);
-    const addNote= async (title,description)=>{
-      const response=await fetch(`https://notebook-backend-67m9.onrender.com/auth/addnotes`,
+    const addNote= async (newnote)=>{
+      const title=newnote.title;
+      const description=newnote.description;
+      const images1=newnote.images;
+      const response=await fetch(`http://localhost:5000/auth/addnotes`,
       {method:'POST',
        headers:{
         "Content-Type": "application/json",
         "auth-token":localStorage.getItem('token')
     
        },
-       body: JSON.stringify({title,description})
+       body: JSON.stringify(newnote)
     })
     const json=await response.json();
           setnotes(notes.concat(json));
@@ -26,22 +29,23 @@ const NoteState=(props)=>{
 
     
   const fetchallnotes=async ()=>{
-  const response=await fetch(`https://notebook-backend-67m9.onrender.com/auth/getnotes`,
+  const response=await fetch(`http://localhost:5000/auth/getnotes`,
   {method:'GET',
    headers:{
     "Content-Type": "application/json",
     "auth-token":localStorage.getItem('token')
 
-   },
+   }
   
 })
 
 const json1= await response.json();
 setnotes(json1);
   }
+  {console.log('backnotes',notes)}
   const DeleteNote=async(id)=>
   {
-    const response=await fetch(`https://notebook-backend-67m9.onrender.com/auth/deletenotes/${id}`,
+    const response=await fetch(`http://localhost:5000/auth/deletenotes/${id}`,
     {method:'DELETE',
      headers:{
       "Content-Type": "application/json",
@@ -56,36 +60,51 @@ setnotes(json1);
    }
     
   
-  const UpdateNote=async (id,title,description)=>{
-    const response=await fetch(`https://notebook-backend-67m9.onrender.com/auth/updatenotes/${id}`,
+  const UpdateNote=async (id,title,description,image)=>{
+    const response=await fetch(`http://localhost:5000/auth/updatenotes/${id}`,
     {method:'PUT',
      headers:{
       "Content-Type": "application/json",
       "auth-token":localStorage.getItem('token')  
   
      },
-     body: JSON.stringify({title,description})
+     body: JSON.stringify({title,description,image})
     
   });
-  const json=response.json();
+  const json=await response.json();
   console.log(json);
-  let newNotes=JSON.parse(JSON.stringify(notes));
-    for(let index=0;index<newNotes.length;index++)
+  console.log(id);
+  let newNotes=[];
+    for(let index=0;index<notes.length;index++)
     {
-      const element=newNotes[index];
+      const element=notes[index];
       if(element._id===id)
       {
-        newNotes[index].title=title;
-        newNotes[index].description=description;
-        newNotes[index]._id=id;
+          element.title=title;
+        element.description=description;
+      
+        element.images=image;
          break;
       }
     }
     
-  setnotes(newNotes);
+  setnotes(notes);
   };
     
+  {console.log(notes)}
+  const updatenotes=async({name,password})=>{
+    const response=await fetch('https://localhost:5000/update',{
+      method:'PUT',
+      headers:{
+        'Content-Type':"application/json",
+      },
+      body:JSON.stringify({name,password})
     
+    })
+    const res1=response.json();
+    setnotes(res1);
+  }
+
     return (
         <NoteContext.Provider value={{a,notes,setnotes,addNote,DeleteNote,UpdateNote,fetchallnotes}}>
             {props.children}
